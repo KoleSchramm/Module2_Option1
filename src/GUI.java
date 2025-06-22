@@ -26,7 +26,7 @@ public class GUI implements ActionListener {
 
         frame = new JFrame("Bank Balance");
 
-        label = new JLabel("New balance: ");
+        label = new JLabel("New balance:");
 
         text = new JTextField();
         text.setPreferredSize(new Dimension(250,30));
