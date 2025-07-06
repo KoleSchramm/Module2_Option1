@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GUI implements ActionListener {
+public class GUI {
     public double balance = 0;
 
     JFrame frame;
@@ -32,7 +30,6 @@ public class GUI implements ActionListener {
         text.setPreferredSize(new Dimension(250,30));
 
         button = new JButton("Submit");
-        button.addActionListener(this);
 
         label2 = new JLabel("Balance: Unknown");
 
@@ -45,12 +42,10 @@ public class GUI implements ActionListener {
         depositText = new JTextField();
 
         depositButton = new JButton("Deposit");
-        depositButton.addActionListener(this);
 
         withdrawText = new JTextField();
 
         withdrawButton = new JButton("Withdraw");
-        withdrawButton.addActionListener(this);
 
         panel = new JPanel();
         panel.setLayout(new GridLayout(6,2));
@@ -71,35 +66,33 @@ public class GUI implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand() == "Submit") {
+        //Action Listeners
+        button.addActionListener((event) -> {
             try {
                 balance = Double.parseDouble(text.getText());
                 label2.setText(String.format("Balance: $%.2f", balance));
             } catch (Exception ex) {
                 label2.setText("Something went wrong.");
             }
-        }
+        });
 
-        if(e.getActionCommand() == "Deposit") {
+        depositButton.addActionListener((event) -> {
             try {
                 balance += Double.parseDouble(depositText.getText());
                 label2.setText(String.format("Balance: $%.2f", balance));
             } catch (Exception ex) {
                 label2.setText("Something went wrong.");
             }
-        }
+        });
 
-        if(e.getActionCommand() == "Withdraw") {
+        withdrawButton.addActionListener((event) -> {
             try {
                 balance -= Double.parseDouble(withdrawText.getText());
                 label2.setText(String.format("Balance: $%.2f", balance));
             } catch (Exception ex) {
                 label2.setText("Something went wrong.");
             }
-        }
+        });
     }
 }
